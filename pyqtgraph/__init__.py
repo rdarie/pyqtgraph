@@ -34,7 +34,7 @@ if 'linux' in sys.platform:  ## linux has numerous bugs in opengl implementation
 elif 'darwin' in sys.platform: ## openGL can have a major impact on mac, but also has serious bugs
     useOpenGL = False
 else:
-    useOpenGL = True  ## on windows there's a more even performance / bugginess tradeoff. 
+    useOpenGL = False  ## on windows there's a more even performance / bugginess tradeoff. 
                 
 CONFIG_OPTIONS = {
     'useOpenGL': useOpenGL, ## by default, this is platform-dependent (see widgets/GraphicsView). Set to True or False to explicitly enable/disable opengl.
@@ -45,7 +45,7 @@ CONFIG_OPTIONS = {
     'antialias': False,
     'editorCommand': None,  ## command used to invoke code editor from ConsoleWidgets
     'exitCleanup': True,    ## Attempt to work around some exit crash bugs in PyQt and PySide
-    'enableExperimental': False, ## Enable experimental features (the curious can search for this key in the code)
+    'enableExperimental': True, ## Enable experimental features (the curious can search for this key in the code)
     'crashWarning': False,  # If True, print warnings about situations that may result in a crash
     'mouseRateLimit': 100,  # For ignoring frequent mouse events, max number of mouse move events per second, if <= 0, then it is switched off
     'imageAxisOrder': 'col-major',  # For 'row-major', image data is expected in the standard (row, col) order.

@@ -1079,6 +1079,7 @@ class ScatterPlotItem(GraphicsObject):
         return mask
 
     # @debug.warnOnException  ## raising an exception here causes crash
+    @debug.ignoreException
     def paint(self, p, *args):
         profiler = debug.Profiler()
         cmode = self.opts.get('compositionMode', None)

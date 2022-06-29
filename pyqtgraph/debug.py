@@ -128,6 +128,14 @@ def warnOnException(func):
             printExc('Ignored exception:')
     return w
 
+def ignoreException(func):
+    """Decorator that catches/ignores exceptions and prints a stack trace."""
+    def w(*args, **kwds):
+        try:
+            func(*args, **kwds)
+        except:
+            pass
+    return w
 
 def getExc(indent=4, prefix='|  ', skip=1):
     lines = formatException(*sys.exc_info(), skip=skip)
