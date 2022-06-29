@@ -34,7 +34,7 @@ if 'linux' in sys.platform:  ## linux has numerous bugs in opengl implementation
 elif 'darwin' in sys.platform: ## openGL can have a major impact on mac, but also has serious bugs
     useOpenGL = False
 else:
-    useOpenGL = False  ## on windows there's a more even performance / bugginess tradeoff. 
+    useOpenGL = True  ## on windows there's a more even performance / bugginess tradeoff. 
                 
 CONFIG_OPTIONS = {
     'useOpenGL': useOpenGL, ## by default, this is platform-dependent (see widgets/GraphicsView). Set to True or False to explicitly enable/disable opengl.
@@ -53,7 +53,7 @@ CONFIG_OPTIONS = {
                                  # The default is 'col-major' for backward compatibility, but this may
                                  # change in the future.
     'useCupy': False,  # When True, attempt to use cupy ( currently only with ImageItem and related functions )
-    'useNumba': False, # When True, use numba
+    'useNumba': True, # When True, use numba
     'segmentedLineMode': 'auto',  # segmented line mode, controls if lines are plotted in segments or continuous
                                   # 'auto': whether lines are plotted in segments is automatically decided using pen properties and whether anti-aliasing is enabled
                                   # 'on' or True: lines are always plotted in segments
