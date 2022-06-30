@@ -182,7 +182,7 @@ class PlotCurveItem(GraphicsObject):
         self.clear()
 
         ## this is disastrous for performance.
-        #self.setCacheMode(QtWidgets.QGraphicsItem.CacheMode.DeviceCoordinateCache)
+        # self.setCacheMode(QtWidgets.QGraphicsItem.CacheMode.DeviceCoordinateCache)
 
         self.metaData = {}
         self.opts = {
@@ -525,7 +525,7 @@ class PlotCurveItem(GraphicsObject):
         self.updateData(*args, **kargs)
 
     def updateData(self, *args, **kargs):
-        profiler = debug.Profiler()
+        #~profiler = debug.Profiler()
 
         if 'compositionMode' in kargs:
             self.setCompositionMode(kargs['compositionMode'])
@@ -551,11 +551,11 @@ class PlotCurveItem(GraphicsObject):
             if data.dtype.kind == 'c':
                 raise Exception("Can not plot complex data types.")
 
+        #~profiler("data checks")
 
-        profiler("data checks")
-
-        #self.setCacheMode(QtWidgets.QGraphicsItem.CacheMode.NoCache)  ## Disabling and re-enabling the cache works around a bug in Qt 4.6 causing the cached results to display incorrectly
-                                                        ##    Test this bug with test_PlotWidget and zoom in on the animated plot
+        #self.setCacheMode(
+        # QtWidgets.QGraphicsItem.CacheMode.NoCache)  ## Disabling and re-enabling the cache works around a bug in Qt 4.6 causing the cached results to display incorrectly
+        ##    Test this bug with test_PlotWidget and zoom in on the animated plot
         self.yData = kargs['y'].view(np.ndarray)
         self.xData = kargs['x'].view(np.ndarray)
         
@@ -563,7 +563,7 @@ class PlotCurveItem(GraphicsObject):
         self.prepareGeometryChange()
         self.informViewBoundsChanged()
 
-        profiler('copy')
+        #~profiler('copy')
 
         if 'stepMode' in kargs:
             self.opts['stepMode'] = kargs['stepMode']
@@ -605,11 +605,11 @@ class PlotCurveItem(GraphicsObject):
         if 'skipFiniteCheck' in kargs:
             self.opts['skipFiniteCheck'] = kargs['skipFiniteCheck']
 
-        profiler('set')
+        #~profiler('set')
         self.update()
-        profiler('update')
+        #~profiler('update')
         self.sigPlotChanged.emit(self)
-        profiler('emit')
+        #~profiler('emit')
 
     @staticmethod
     def _generateStepModeData(stepMode, x, y, baseline):
@@ -844,7 +844,7 @@ class PlotCurveItem(GraphicsObject):
     # @debug.warnOnException  ## raising an exception here causes crash
     @debug.ignoreException
     def paint(self, p, opt, widget):
-        profiler = debug.Profiler()
+        #~profiler = debug.Profiler()
         if self.xData is None or len(self.xData) == 0:
             return
 
@@ -873,10 +873,10 @@ class PlotCurveItem(GraphicsObject):
             else:
                 paths = [self._getFillPath()]
 
-            profiler('generate fill path')
+            #~profiler('generate fill path')
             for path in paths:
                 p.fillPath(path, self.opts['brush'])
-            profiler('draw fill path')
+            #~profiler('draw fill path')
 
         # Avoid constructing a shadow pen if it's not used.
         if self.opts.get('shadowPen') is not None:
@@ -911,7 +911,7 @@ class PlotCurveItem(GraphicsObject):
                 p.drawPath(self._getFillPath())
             else:
                 p.drawPath(self.getPath())
-        profiler('drawPath')
+        #~profiler('drawPath')
 
     def paintGL(self, p, opt, widget):
         p.beginNativePainting()

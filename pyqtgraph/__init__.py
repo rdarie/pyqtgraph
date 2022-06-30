@@ -25,7 +25,6 @@ from .Qt import mkQApp
 
               ## (import here to avoid massive error dump later on if numpy is not available)
 
-
 ## in general openGL is poorly supported with Qt+GraphicsView.
 ## we only enable it where the performance benefit is critical.
 ## Note this only applies to 2D graphics; 3D graphics always use OpenGL.
@@ -45,7 +44,7 @@ CONFIG_OPTIONS = {
     'antialias': False,
     'editorCommand': None,  ## command used to invoke code editor from ConsoleWidgets
     'exitCleanup': True,    ## Attempt to work around some exit crash bugs in PyQt and PySide
-    'enableExperimental': True, ## Enable experimental features (the curious can search for this key in the code)
+    'enableExperimental': False, ## Enable experimental features (the curious can search for this key in the code)
     'crashWarning': False,  # If True, print warnings about situations that may result in a crash
     'mouseRateLimit': 100,  # For ignoring frequent mouse events, max number of mouse move events per second, if <= 0, then it is switched off
     'imageAxisOrder': 'col-major',  # For 'row-major', image data is expected in the standard (row, col) order.
@@ -53,13 +52,12 @@ CONFIG_OPTIONS = {
                                  # The default is 'col-major' for backward compatibility, but this may
                                  # change in the future.
     'useCupy': False,  # When True, attempt to use cupy ( currently only with ImageItem and related functions )
-    'useNumba': True, # When True, use numba
+    'useNumba': False, # When True, use numba
     'segmentedLineMode': 'auto',  # segmented line mode, controls if lines are plotted in segments or continuous
                                   # 'auto': whether lines are plotted in segments is automatically decided using pen properties and whether anti-aliasing is enabled
                                   # 'on' or True: lines are always plotted in segments
                                   # 'off' or False: lines are never plotted in segments
 }
-
 
 def setConfigOption(opt, value):
     if opt not in CONFIG_OPTIONS:

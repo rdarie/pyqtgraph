@@ -18,7 +18,7 @@ __all__ = ['ScatterPlotItem', 'SpotItem']
 
 ## Build all symbol paths
 name_list = ['o', 's', 't', 't1', 't2', 't3', 'd', '+', 'x', 'p', 'h', 'star',
-             'arrow_up', 'arrow_right', 'arrow_down', 'arrow_left', 'crosshair']
+             'arrow_up', 'arrow_right', 'arrow_down', 'arrow_left', 'crosshair', '|']
 Symbols = OrderedDict([(name, QtGui.QPainterPath()) for name in name_list])
 Symbols['o'].addEllipse(QtCore.QRectF(-0.5, -0.5, 1, 1))
 Symbols['s'].addRect(QtCore.QRectF(-0.5, -0.5, 1, 1))
@@ -33,6 +33,15 @@ def makeCrosshair(r=0.5, w=1, h=1):
     path.lineTo(0, h)
     return path
 Symbols['crosshair'] = makeCrosshair()
+
+def makeTick():
+    path = QtGui.QPainterPath()
+    path.moveTo(0, -0.5)
+    path.lineTo(0, 0.5)
+    path.closeSubpath()
+    return path
+
+Symbols['|'] = makeTick()
 
 coords = {
     't': [(-0.5, -0.5), (0, 0.5), (0.5, -0.5)],
@@ -458,7 +467,7 @@ class ScatterPlotItem(GraphicsObject):
         self.setData(*args, **kargs)
         profiler('setData')
 
-        #self.setCacheMode(self.DeviceCoordinateCache)
+        # self.setCacheMode(self.DeviceCoordinateCache)
 
         # track when the tooltip is cleared so we only clear it once
         # this allows another item in the VB to set the tooltip

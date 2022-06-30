@@ -372,6 +372,8 @@ if QT_LIB in [PYSIDE2, PYSIDE6]:
     compat.unwrapinstance = lambda x : shiboken.getCppPointer(x)[0]
     compat.voidptr = shiboken.VoidPtr
 
+    QtCore.pyqtSignal = QtCore.Signal
+
 # Common to PyQt5 and PyQt6
 if QT_LIB in [PYQT5, PYQT6]:
     QtVersion = QtCore.QT_VERSION_STR
