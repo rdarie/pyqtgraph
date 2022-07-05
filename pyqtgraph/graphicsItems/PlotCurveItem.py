@@ -841,8 +841,8 @@ class PlotCurveItem(GraphicsObject):
 
         return paths
 
-    # @debug.warnOnException  ## raising an exception here causes crash
-    @debug.ignoreException
+    # @debug.ignoreException
+    @debug.warnOnException  ## raising an exception here causes crash
     def paint(self, p, opt, widget):
         #~profiler = debug.Profiler()
         if self.xData is None or len(self.xData) == 0:
